@@ -12,8 +12,8 @@ export async function activate(context: vscode.ExtensionContext) : Promise<Serve
 		state: 0,
 		serverStates: [],
 		type: {
-			id: 'id',
-			visibilename: 'rsp 1'
+			id: 'redhat.rspprovider-sample',
+			visibilename: 'RSP Server (Wildfly, Eap, Minishift)'
 		}
 	};
 	const serverConnector = await serverConnectorAPI.extension.RSPProvider.api;
