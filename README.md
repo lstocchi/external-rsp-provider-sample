@@ -58,5 +58,3 @@ Stable releases are archived under http://download.jboss.org/jbosstools/adapters
 **Chat:** Chat with us on [Gitter](https://gitter.im/redhat-developer/server-connector).
 
 License
-=======
-EPL 2.0, See [LICENSE](LICENSE) for more information.
