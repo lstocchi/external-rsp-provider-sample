@@ -1,6 +1,6 @@
 import * as server from './server';
-import { ServerAPI } from 'vscode-server-connector-api/js/server/serverAPI';
-import { ServerInfo } from 'vscode-server-connector-api/js/util/types';
+import { ServerAPI } from 'vscode-server-connector-api/out/server/serverAPI';
+import { ServerInfo } from 'vscode-server-connector-api/out/util/types';
 
 export class ExtensionAPI implements ServerAPI {
 
