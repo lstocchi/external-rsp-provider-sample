@@ -1,0 +1,6 @@
+.vscode
+out
+node_modules
+*.vsix
+*.zip
+server
