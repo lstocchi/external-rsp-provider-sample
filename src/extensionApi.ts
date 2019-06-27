@@ -30,8 +30,10 @@ export class ExtensionAPI implements ServerAPI {
         });
     }
 
-    public async stopRSP() {
-        
+    public async stopRSP(): Promise<void> {
+        server.terminate().catch(err => { 
+            return err;
+        });
     }
 
     public onRSPServerStateChanged(listener: (state: number) => void): void {
