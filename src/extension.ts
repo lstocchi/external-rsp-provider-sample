@@ -6,7 +6,7 @@ import { ServerAPI } from 'vscode-server-connector-api/out/server/serverAPI';
 import { ServerState } from 'vscode-server-connector-api/out/constants';
 import { RSP_PROVIDER_NAME, RSP_PROVIDER_ID } from './constants';
 
-export async function activate(context: vscode.ExtensionContext) : Promise<ServerAPI>{
+export async function activate(context: vscode.ExtensionContext): Promise<ServerAPI>{
 
 	const api: ExtensionAPI = new ExtensionAPI();
 
@@ -19,8 +19,7 @@ export async function activate(context: vscode.ExtensionContext) : Promise<Serve
 	};
 	const serverConnector = await serverConnectorAPI.extension.RSPProvider.api;
 
-	if (serverConnector.available) {
-		
+	if (serverConnector.available) {		
 		serverConnector.api.registerRSPProvider(rsp).catch((x: string) =>
 			console.log('error' + x));
 	}
@@ -29,4 +28,10 @@ export async function activate(context: vscode.ExtensionContext) : Promise<Serve
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export async function deactivate() {
+	const serverConnector = await serverConnectorAPI.extension.RSPProvider.api;
+
+	if (serverConnector.available) {		
+		serverConnector.api.deregisterRSPProvider(RSP_PROVIDER_ID);
+	}
+}
