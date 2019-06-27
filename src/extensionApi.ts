@@ -2,6 +2,8 @@ import * as server from './server';
 import { ServerAPI } from 'vscode-server-connector-api/out/server/serverAPI';
 import { ServerInfo } from 'vscode-server-connector-api/out/util/types';
 import { EventEmitter } from 'events';
+import { ServerState } from 'vscode-server-connector-api/out/constants';
+import { RSP_PROVIDER_NAME } from './constants';
 
 export class ExtensionAPI implements ServerAPI {
 
@@ -16,11 +18,15 @@ export class ExtensionAPI implements ServerAPI {
     }
 
     public async startRSP(stdoutCallback: (data: string) => void, stderrCallback: (data: string) => void ): Promise<ServerInfo>  {
-        this.updateRSPStateChanged(1);
+        this.updateRSPStateChanged(ServerState.STARTING);
         return await server.start(stdoutCallback, stderrCallback).then(serverInfo => {
             this.host = serverInfo.host;
             this.port = serverInfo.port;
+            this.updateRSPStateChanged(ServerState.STARTED);
             return serverInfo;
+        }).catch(() => {
+            this.updateRSPStateChanged(ServerState.STOPPED);
+            return Promise.reject(`Error - ${RSP_PROVIDER_NAME} failed to start`);
         });
     }
 
